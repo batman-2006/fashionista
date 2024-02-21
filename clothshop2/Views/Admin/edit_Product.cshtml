@@ -1,0 +1,35 @@
+﻿@model clothshop2.Models.Product
+
+@{
+    Layout = "_layout2";
+    var cats = (List<Category>)ViewData["MyData3"];
+
+}
+<center>
+    <br />
+    <div class="container">
+        <div class="card">
+            <h2>Edit Product</h2>
+            <form action="/Admin/Update_products" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+
+                <input type="text" id="password" asp-for="Name" name="name" placeholder="Enter The Product name" required>
+
+                <input type="text" id="password" asp-for="Price" name="price" placeholder="Enter The Product Price" required>
+                <input type="text" id="password" asp-for="description" name="desc" placeholder="Enter The Product Desc" required>
+                <input type="file" id="password" name="imgfile">
+                <select name="catid" class="form-control">
+                    @foreach (var c in cats)
+                    {
+                        <option value="@c.Id">@c.Name</option>
+                    }
+
+                </select>
+                <br />
+                <button type="submit">Edit Product</button>
+
+                <br />
+            </form>
+        </div>
+    </div>
+</center>

@@ -1,0 +1,270 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using clothshop2.Areas.Identity.Data
+
+@inject SignInManager<clothshop2.Areas.Identity.Data.clothshop2User> SignInManager
+@inject UserManager<clothshop2.Areas.Identity.Data.clothshop2User> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - clothshop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/fc6703f66d.js" crossorigin="anonymous"></script>
+  
+
+  <!-- Template Main CSS File -->
+  <style>
+        .pr_style {
+            color: red;
+        }
+  
+     
+      .navbar-light{
+            background-color: #ffffff!important;
+      }
+      .navbar-brand{
+          font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+          font-size: 50px!important;
+          font-weight:lighter!important;
+      }
+
+        .navbar-brand:hover {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+            font-size: 50px !important;
+            font-weight: lighter !important;
+            color:black!important;
+        }
+      .dropdown-toggle{
+          background:none;
+          border:none;
+          margin:7px;
+            font-weight: lighter !important;
+        }
+
+        .col {
+          
+            position: relative;}
+
+         
+
+        .tag {
+            transition:0.5s;
+            opacity:0;
+            display:block;
+            float: none;
+            position: absolute;
+            left: 12px;
+            width:475px;
+            height:320px;
+            top: 0px;
+            z-index: 1000;
+            background-color: rgba(255,255,255,0.0);
+            color: black;
+            padding-top:120px;
+            padding-left:20px;
+            font-weight: bold;
+        }
+
+            .tag:hover {
+                transition:all.5s;
+                opacity:1;
+                background-color: rgba(255,255,255,0.7)!important;
+            }
+            i{
+                font-size:20px!important;
+            }
+
+           .black-style{
+            background: #f5f5f5;
+           }
+
+       .highlight{
+           color:red;
+       }
+
+       .reg-style{
+            background: #e7e8ea;
+       }
+    
+       .log-style{
+           margin-top:50px;
+       }
+         .btn-danger{
+             color:white!important;
+         }
+    </style>
+</head>
+<body class="log-style">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/home"><img class="logo-style" src="https://img.freepik.com/premium-vector/fashion-beauty-logo-design-concept_96807-1625.jpg" /> Fashionista</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Men's Wear</a></li>
+                            <divider></divider>
+                            <li><a class="dropdown-item" href="#">Women's Wear</a></li>
+                            <li><a class="dropdown-item" href="#">Kid's Wear</a></li>
+                        </ul>
+                    </div>
+                    <li class="nav-item">
+                       
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @User.Identity?.Name!</a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
+                            </form>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                            &nbsp;&nbsp;<a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                        }
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <div class="container log-style">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <br>
+    <br>
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="cta-text">
+                                <h4>Find us</h4>
+                                <span>1010 Avenue, sw 54321, chandigarh</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-phone"></i>
+                            <div class="cta-text">
+                                <h4>Call us</h4>
+                                <span>9876543210 0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="far fa-envelope-open"></i>
+                            <div class="cta-text">
+                                <h4>Mail us</h4>
+                                <span>mail@info.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="index.html"><img src="https://img.freepik.com/premium-vector/fashion-beauty-logo-design-concept_96807-1625.jpg" class="img-fluid" alt="logo"></a>
+                            </div>
+                            <div class="footer-text">
+                                <p>This Is The Best Online Shop For Clothes For Everyone From New Born Kids To Adults For Both Men And Women
+                                </p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span>Follow us</span>
+                                <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h4>Useful Links</h4>
+                            </div>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Our Services</a></li>
+                                <li><a href="#">Contact us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h4>Subscribe</h4>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>Don’t miss to Rigester With Us To Get The Latest News About Our Offer.</p>
+                                <button class="btn btn-primary">Register Now</button>
+
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2024, All Right Reserved <a href="https://codepen.io/anupkumar92/">Fashionista</a></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a>Home</a></li>
+                                <li><a href="#">Terms</a></li>
+                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#">Policy</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Template Main JS File -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

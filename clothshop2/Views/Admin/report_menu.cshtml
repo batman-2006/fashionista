@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_layout2";
+}
+<div class="text-center">
+    <h1 class="display-4 ">Let's Generate A Report !!</h1>
+    <h3>Choose What Type Of report You Want</h3>
+<div class="row row-style2">
+
+    <div class="col-md-4">
+        <div class="card" style="width: 19rem;">
+            <div class="card-body">
+                <center>
+                <img class="img-style"src="/img/rep1.png" />
+                    <br />
+                    <br />
+                    <h4>Graph Report</h4>
+                    <p>Generate A Report With Graphs Only</p>
+                        <a asp-action="report_content" asp-route-id="1"  class="btn btn-primary">Generate</a>
+                </center>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="width: 19rem;">
+            <div class="card-body">
+                <center>
+                    <img class="img-style" src="/img/rep2.png" />
+                    <br />
+                    <br />
+                    <h4>Graph-Text Report</h4>
+                    <p>Generate A Report With Graphs and Tables</p>
+                    <a asp-action="report_content" asp-route-id="2" class="btn btn-primary">Generate</a>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="width: 19rem;">
+            <div class="card-body">
+                <center>
+                    <img class="img-style" src="/img/rep3.png" />
+                    <br />
+                    <br />
+                    <h4>Text Report</h4>
+                    <p>Generate A Report With Tables Only</p>
+                        <a asp-action="report_content" asp-route-id="3" class="btn btn-primary">Generate</a>
+                </center>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

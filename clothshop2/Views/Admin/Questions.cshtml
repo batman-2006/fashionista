@@ -1,0 +1,32 @@
+﻿@model IEnumerable<clothshop2.Models.Question>
+
+@{
+    Layout = "_layout2";
+    int i = 1;
+}
+<h1>All Questions</h1>
+<hr>
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Question Title</th>
+            <th>Question Content</th>
+            <th>From</th>
+            <th>Reply</th>
+            <th>Delete</th>
+        </tr>
+        <tbody>
+            @foreach(var m in Model)
+            {
+                <td>@i</td>
+        <td>@Html.DisplayFor(modelItem => m.Title)</td>
+        <td>@Html.DisplayFor(modelItem => m.content)</td>
+        <td>@Html.DisplayFor(modelItem => m.from)</td>
+        <td><a href="https://mail.google.com/mail/u/0/?ogbl#inbox?compose=new" class="btn btn-primary">Reply</a></td>
+        <td><a asp-action="delete_question" asp-route-id="@m.Id" class="btn btn-danger">Delete</a></td>
+                i++;
+            }
+        </tbody>
+    </thead>
+</table>

@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using clothshop2.Areas.Identity.Data
+
+@inject SignInManager<clothshop2.Areas.Identity.Data.clothshop2User> SignInManager
+@inject UserManager<clothshop2.Areas.Identity.Data.clothshop2User> UserManager
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/home"><img class="logo-style" src="https://img.freepik.com/premium-vector/fashion-beauty-logo-design-concept_96807-1625.jpg" /> Fashionista</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Men's Wear</a></li>
+                        <divider></divider>
+                        <li><a class="dropdown-item" href="#">Women's Wear</a></li>
+                        <li><a class="dropdown-item" href="#">Kid's Wear</a></li>
+                    </ul>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Your Cart
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span class="position-absolute top-1 start-5 translate-middle badge rounded-pill bg-danger">
+                            2
+                        </span>
+
+                    </a>
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @User.Identity?.Name!</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
+                        </form>
+                    </li>
+                    }
+                    else
+                    {
+                    <li class="nav-item">
+                        &nbsp;&nbsp;<a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                    }
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<center>
+    <img class="img-style2" src="~/img/success-icon-2048x2048-8woikx05.png" />
+    <br />
+    <br />
+    <h2>Your Question Has Been Sent</h2>
+   <hr />
+   <h4>You Will Get A Reply On Your E-Mail Soon</h4>
+    <br />
+    <br />
+    <a class="btn btn-lg btn-danger" href="/Home/ask">Go Back</a>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />

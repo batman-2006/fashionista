@@ -1,0 +1,18 @@
+﻿@model clothshop2.Models.Category
+@{
+    Layout = "_layout2";
+}
+<center>
+    <br />
+    <div class="container">
+        <div class="card">
+            <h2>Create New Category</h2>
+            <form action="/Admin/Update_categories" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="text" id="password" name="name" asp-for="Name" required>
+                <button type="submit">Create Category</button>
+                <br />
+            </form>
+        </div>
+    </div>
+</center>

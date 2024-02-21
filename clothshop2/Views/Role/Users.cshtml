@@ -1,0 +1,100 @@
+﻿@model IEnumerable<clothshop2.Areas.Identity.Data.clothshop2User>
+@{
+    Layout = "_layout2";
+    int i = 1;
+    var admins = (List<Admin>)ViewData["MyData2"];
+    int tr = 0;
+}
+
+<br />
+
+<h1>All Users</h1>
+<a href="/Role/Admins"><button>View Admins</button></a>
+<hr>
+    <table class="table table-striped table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+            </th>
+            
+           <th>
+               Make Admin
+           </th>
+               <th>
+                   Delete User
+               </th> 
+            
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            
+            <tr>
+                    <td>@i</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                <td>
+                    @if(item.PhoneNumber == null)
+                    {
+                        @Html.Raw("-----");
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+
+                    }
+                </td>
+                <td>
+                    @if (item.TwoFactorEnabled)
+                    {
+                       @Html.Raw("Enabled");
+                    }
+                    else
+                    {
+                        @Html.Raw("Disabled");
+
+                    }
+                </td>
+                   
+                
+                    <td>
+                    <a class="btn  btn-primary" href="/Role/Assign_Role/@item.Id/@item.Email">Make Admin</a>
+
+                    </td>
+                    <td>
+                    <a class="btn  btn-danger" href="/Role/Delete/@item.Id/@item.Email">Delete</a>
+
+                    </td>
+               
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+
+@section Scripts {
+    <script type="text/javascript">
+        if (document.getElementById("my_cell").innerHTML == "") {
+            document.getElementById("my_cell").innerHTML == "hi";
+        }
+    </script>
+}

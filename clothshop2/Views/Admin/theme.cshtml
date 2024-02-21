@@ -1,0 +1,60 @@
+﻿@model clothshop2.Models.theme
+@{
+    Layout = "_layout2";
+}
+<h1>Theme Control</h1>
+<hr />
+<form action="/Admin/change_theme" method="post" enctype="multipart/form-data">
+    <h2>Navbar Customization</h2>
+    <hr />
+    Logo:
+    <input type="text" name="logo" class="form-control w-50"  value="@Model.logo" placeholder="Change The Logo name" />
+    <br />
+    Show/Hide Navbar
+    <select name="show_nav">
+        <option value="1">Show</option>
+        <option value="0">Hide</option>
+    </select>
+    <br />
+   Navbar Style
+    <select name="nav_style" class="form-control">
+        <option value="navbar navbar-expand-lg navbar-dark bg-dark text-light shadow fixed-top">Dark style</option>
+        <option value="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">Light style</option>
+    </select>
+    <br />
+    <hr />
+    <h2>Header Customization</h2>
+    <hr />
+    Show/Hide Header
+    <select name="show_head" class="form-control">
+        <option value="1">Show</option>
+        <option value="0">Hide</option>
+    </select>
+    <br />
+    Change header pic :
+    <input type="file"  class="form-control" name="header_img"/>
+    <h6 class="note">Best Dimensions For The Image Is : 1750px x 450px</h6>
+    <h6 class="note">The Image Name Must Be Header and it's Format Must Be JPG</h6>
+
+    <br />
+    <hr />
+    <h2>Special Section Customization</h2>
+    <hr />
+    Show/Hide Section
+    <select name="show_spec" class="form-control">
+        <option value="1">Show</option>
+        <option value="0">Hide</option>
+    </select>
+    <br />
+    Change Section Title :
+    <input type="text" name="sec_title" value="@Model.special_title" class="form-control" />
+    <br />
+
+    Change Section Content :
+    <textarea name="sec_content">
+        @Model.special_content
+    </textarea>
+    <br />
+    <input type="submit" class="btn btn-primary" value="Change Theme"/>
+
+</form>

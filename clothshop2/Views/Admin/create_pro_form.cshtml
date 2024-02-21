@@ -1,0 +1,35 @@
+﻿@model IEnumerable<clothshop2.Models.Category>
+
+
+@{
+    Layout = "_layout2";
+
+}
+
+<center>
+    <br />
+    <div class="container">
+        <div class="card">
+            <h2>Add New Product</h2>
+            <form action="/Admin/Create_products" method="post" enctype="multipart/form-data">
+                <input type="text" id="password" name="name" placeholder="Enter The Product name" required>
+
+<input type="text" id="password" name="price" placeholder="Enter The Product Price" required>
+<input type="text" id="password" name="desc" placeholder="Enter The Product Desc" required>
+<input type="file" id="password" name="imgfile" >
+
+<select name="id" class="form-control">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+
+</select>
+                <br />
+                <button type="submit">Add Product</button>
+
+                <br />
+            </form>
+        </div>
+    </div>
+</center>

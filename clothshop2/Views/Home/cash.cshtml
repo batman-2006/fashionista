@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using clothshop2.Areas.Identity.Data
+
+@inject SignInManager<clothshop2.Areas.Identity.Data.clothshop2User> SignInManager
+@inject UserManager<clothshop2.Areas.Identity.Data.clothshop2User> UserManager
+@{
+    int i = 1;
+    var cats = (List<Category>)ViewData["MyData4"];
+
+}
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/home"><img class="logo-style" src="https://img.freepik.com/premium-vector/fashion-beauty-logo-design-concept_96807-1625.jpg" /> Fashionista</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Home">Home</a>
+                </li>
+               
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @User.Identity?.Name!</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        &nbsp;&nbsp;<a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<br />
+<br />
+<div class="container">
+    <center>
+<img src="/img/cash.png" />
+<br />
+<h3>Your Order Is On It's Way !!!</h3>
+<hr />
+
+<h4>Your Order is Ready and it will reach you in 48 hours max !</h4>
+<a href="/Home" class="btn btn-danger">Go Back</a>
+    </center>
+
+</div>
+<br />
+<br />
+<br />

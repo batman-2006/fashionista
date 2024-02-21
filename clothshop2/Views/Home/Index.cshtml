@@ -1,0 +1,209 @@
+﻿@model IEnumerable<clothshop2.Models.Category>
+@{
+    ViewData["Title"] = "Home Page";
+
+    var theme = (List<theme>)ViewData["theme"];
+    var cat=0;
+    foreach(var t in theme)
+    {
+        cat = t.show_cat;
+    }
+}
+@using Microsoft.AspNetCore.Identity
+@using clothshop2.Areas.Identity.Data
+
+@inject SignInManager<clothshop2.Areas.Identity.Data.clothshop2User> SignInManager
+@inject UserManager<clothshop2.Areas.Identity.Data.clothshop2User> UserManager
+@foreach(var t in theme){
+     
+
+    @if(t.show_nav==1){
+<nav class="@t.nav_style">
+    <div class="container">
+        <a class="navbar-brand" href="/home"><img class="logo-style" src="https://img.freepik.com/premium-vector/fashion-beauty-logo-design-concept_96807-1625.jpg" /> @t.logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Home/ask">Ask A Question</a>
+                        </li>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu">
+                        
+                       
+                        @foreach (var item in Model)
+                        {
+                            <li><a class="dropdown-item" href="/Home/Products/@item.Id">@item.Name</a></li>
+                        }
+                    </ul>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="ViewCart" asp-route-id="@User.Identity.Name">
+                        Your Cart
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span class="position-absolute top-1 start-5 translate-middle badge rounded-pill bg-danger">
+                            @ViewBag.count
+                        </span>
+
+                    </a>
+                </li>
+                
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @User.Identity.Name</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        &nbsp;&nbsp;<a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+}
+}
+<br />
+<br />
+<!-- Full Page Image Header with Vertically Centered Content -->
+@foreach(var t in theme){
+    @if (t.show_header==1)
+    {
+        <header class="masthead">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 text-center">
+                        <h1 class="fw-dark">New Arrivals</h1>
+                        <p class="lead">Celebrate Summer With our New Summer Collection </p>
+                        <p class="lead2">and Offers up to <b>30%</b></p>
+                        <a href="" class="btn btn-style1 btn-light">Enjoy !!</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    }
+}
+<br />
+<br />
+@foreach(var t in theme){
+    @if (t.show_special == 1)
+    {
+        <div class="container-fluid black-style">
+            <div class="row">
+                <div class="col-8">
+                    <img src="/img/special.jpg">
+                </div>
+                <div class="col-4 col-style">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h1>
+                       @t.special_title
+                    </h1>
+                    <br />
+                    <h3>
+                        @t.special_content
+                    </h3>
+
+                    <a href="" class="btn btn-style btn-primary">Explore Now !!</a> &nbsp; &nbsp; &nbsp; &nbsp;
+                </div>
+            </div>
+        </div>
+    }}
+    <br />
+<br />
+
+
+    <div class="container-fluid">
+        <center>
+            <h1>Categories</h1>
+        </center>
+        <hr />
+    <div class="row">
+        <div class="col col-md-4">
+            <div class="tag">
+                <center>
+                    <h2>Men's Wear</h2>
+                    <a href="/Home/Products/1" class="btn btn-dark">Go To</a>
+                </center>
+            </div>
+           <img src="~/img/stylish-young-bearded-man-checkered-shirt-posing-yellow-wall-fashion-trend-style-apparel.jpg" />
+        </div>
+            <div class="col col-md-4">
+            <div class="tag">
+                <center>
+                    <h2>Women's Wear</h2>
+                    <a href="/Home/Products/2" class="btn btn-dark">Go To</a>
+                </center>
+            </div>
+            <img src="~/img/positive-woman-red-beret-trendy-blouse-smiles-holds-bags-from-clothing-stores.jpg" />
+        </div>
+        <div class="col col-md-4">
+            <div class="tag">
+                <center>
+                <h2>Kid's Wear</h2>
+                <a href="/Home/Products/3" class="btn btn-dark">Go To</a>
+                </center>
+            </div>
+
+            <img src="~/img/happy-young-boy-sitting-skateboard-showing-thumb-up.jpg" />
+        </div>
+</div>
+
+
+<br />
+
+   
+<div class="container-fluid reg-style">
+        <div class="row">
+            <div class="col-8">
+                <center>
+                    <img src="~/img/istockphoto-1307933462-612x612.jpg" class="img-fluid" />
+                </center>
+               
+            </div>
+            <div class="col-4 col-style">
+                <br />
+                <br />
+                <br />
+               
+                <h1>
+                    Why <b>Register</b> With Us ?
+                </h1>
+                <br />
+                <h4>
+                    1- To Get The latest News Via <b class="highlight">Email</b>
+                </h4>
+                <br />
+                <h4>
+                    2- Registered User's Get <b class="highlight">10%</b> Sale.
+                </h4>
+                <br />
+                <h4>
+                    3- Get <a href=""><b class="highlight">Points</b></a> After Every Shopping.
+                </h4>
+
+                <a href="Identity/Account/Register" class="btn btn-style btn-primary">Register Now !!</a> &nbsp; &nbsp; &nbsp; &nbsp;
+            </div>
+        </div>
+</div>

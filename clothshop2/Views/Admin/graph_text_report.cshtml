@@ -1,0 +1,130 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_layout5";
+    var date = DateTime.Now.ToString();
+    var total = ViewBag.data1 + ViewBag.data2 + ViewBag.data3;
+}
+<div class="container-fluid" id="print">
+    <center>
+    <h2 class="title">@ViewBag.title Report</h2>
+    </center>
+    <hr class="class-1"/>
+   <center>
+        <h4>@date</h4>
+   </center>
+   <br />
+   @if(ViewBag.type==1){
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    }
+    else if(ViewBag.type==2)
+    {
+        <center>
+        <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+        </center>
+    }
+    <br />
+    <br />
+    <h3>@ViewBag.title Report Summary</h3>
+    <table class="table table-striped table-responsive table-hover">
+        <thead>
+            <tr>
+               
+                    
+                </tr>
+                <tr>
+                <th>Number Of @ViewBag.name1</th>
+                <th>@ViewBag.data1</th>
+                </tr>
+               <tr>
+                <th>Number Of @ViewBag.name2</th>
+                <td>@ViewBag.data2</td>
+               </tr>
+               <tr>
+                <th>Number Of @ViewBag.name3</th>
+                <td>@ViewBag.data3</td>
+
+               </tr>
+                <tr>
+                <th>Total Number</th>
+                <td>@total</td>
+
+                </tr>
+
+
+            </tr>
+        </thead>
+       
+    </table>
+
+  
+
+</div>
+
+@section Scripts {
+    <script>
+
+        const xValues = ["Men", "Women", "Kids"];
+        const yValues = [@ViewBag.data1, @ViewBag.data2, @ViewBag.data3];
+        const barColors = ["red", "green", "blue"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Product Sales this Month"
+                }
+            }
+        });
+
+        const xValues2 = ["Men", "Women", "Kid's"];
+        const yValues2 = [@ViewBag.data1, @ViewBag.data2, @ViewBag.data3];
+        const barColors2 = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145"
+        ];
+
+        new Chart("myChart2", {
+            type: "pie",
+            data: {
+                labels: xValues2,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Inventory Data Analysis"
+                }
+            }
+        });
+
+
+
+       
+
+    </script>
+    
+}
+
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        </div>
+    </div>
+<script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
+
+</div>

@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_layout2";
+    int id = ViewBag.id;
+}
+<div class="text-center">
+    <br />
+    <br /><br /><br />
+    <h2>Please choose The Report Content</h2>
+    <hr />
+    <div class="container-fluid" id="example">
+        <ul class="list">
+            <li class="shopping">
+                @if(id==1){
+                    <a class="a-style" asp-action="graph_report" asp-route-id="1"> <span class="title">Products Sales Data Analysis</span></a>
+                } 
+
+                else if (id == 2)
+                {
+
+                    <a class="a-style" asp-action="graph_text_report" asp-route-id="1"> <span class="title">Products Sales Data Analysis</span></a>
+
+                }
+                else
+                {
+                    <a class="a-style"  asp-action="text_report" asp-route-id="1"> <span class="title">Products Sales Data Analysis</span></a>
+
+                }
+            </li>
+            <li class="personal">
+                @if (id == 1)
+                {
+                    <a class="a-style" asp-action="graph_report" asp-route-id="2"> <span class="title">Current Inventory Data Analysis</span></a>
+                }
+
+                else if (id == 2)
+                {
+
+                    <a class="a-style"  asp-action="graph_text_report" asp-route-id="2"> <span class="title">Current Inventory Data Analysis</span></a>
+
+                }
+                else
+                {
+                    <a class="a-style"  asp-action="text_report" asp-route-id="2"> <span class="title">Current Inventory Data Analysis</span></a>
+
+                }
+            </li>
+            <li class="work">
+                @if (id == 1)
+                {
+                    <a class="a-style" asp-action="graph_report" asp-route-id="3"> <span class="title">Users Data Analysis</span></a>
+                }
+
+                else if (id == 2)
+                {
+
+                    <a class="a-style" asp-action="graph_text_report" asp-route-id="3"> <span class="title">Users Data Analysis</span></a>
+
+                }
+                else
+                {
+                    <a class="a-style" asp-action="text_report" asp-route-id="3"> <span class="title"> Users Data Analysis</span></a>
+
+                }
+            </li>
+            <li class="personal">
+                <span class="title">Get Users Log-File Data </span>
+            </li>
+            
+            <li class="work">
+                <span class="title">Get All Cateogires Data</span>
+            </li>
+        </ul>
+    </div>
+
+
+
+</div>

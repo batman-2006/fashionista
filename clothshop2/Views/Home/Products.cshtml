@@ -1,0 +1,126 @@
+﻿@model IEnumerable<clothshop2.Models.Product>
+@{
+    ViewData["Title"] = "Home Page";
+    var cats = (List<Category>)ViewData["MyData4"];
+
+}
+@using Microsoft.AspNetCore.Identity
+@using clothshop2.Areas.Identity.Data
+
+@inject SignInManager<clothshop2.Areas.Identity.Data.clothshop2User> SignInManager
+@inject UserManager<clothshop2.Areas.Identity.Data.clothshop2User> UserManager
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/home"><img class="logo-style" src="https://img.freepik.com/premium-vector/fashion-beauty-logo-design-concept_96807-1625.jpg" /> Fashionista</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Home">Home</a>
+                </li>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu">
+
+
+                        @foreach (var c in cats)
+                        {
+                            <li><a class="dropdown-item" href="/Home/Products/@c.Id">@c.Name</a></li>
+                        }
+                    </ul>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="ViewCart" asp-route-id="@User.Identity.Name">
+                        Your Cart
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span class="position-absolute top-1 start-5 translate-middle badge rounded-pill bg-danger">
+                            @ViewBag.count
+                        </span>
+
+                    </a>
+                </li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @User.Identity?.Name!</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        &nbsp;&nbsp;<a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<div class="container-fluid">
+    <div class="product-list">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 col-sm-6">
+                    <a asp-action="details" asp-route-id="@item.Id">
+                        <div class="white-box">
+
+                            <div>
+                                <img class="img-fluid img-style" src="~/img/@item.imgName">
+                            </div>
+                            <div class="product-bottom">
+                                <br />
+                                <h4 class="product-name2">@item.Name</h4>
+                                <div class="price">
+                                    @item.Price <span class="rupee-icon">L.E</span>
+                                </div>
+                                <form action="/Home/Cart" method="post">
+                                    <input type="hidden" name="username" value="@User.Identity.Name" />
+                                    <input type="hidden" name="productname" value="@item.Name" />
+                                    <input type="hidden" name="price" value="@item.Price" />
+                                    <input type="hidden" name="type" value="1" />
+                                    <input type="hidden" name="proid" value="0" />
+
+                                    <input type="hidden" name="id" value="@item.Catid" />
+                                    @if(User.Identity.IsAuthenticated){
+                                        <button class="btn btn-dark" type="submit">Add To Cart</button>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Home/login" class="btn btn-dark">Add To Cart</a>
+                                    }
+                                </form>
+                            </div>
+                        </div>
+
+                    </a>
+                    <br />
+
+                </div>
+            }
+           
+            
+        </div>
+      
+
+    </div>
+</div>
+
+<br />
+<br />
+
